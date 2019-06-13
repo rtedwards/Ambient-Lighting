@@ -1,7 +1,13 @@
 # Ambient Lighting
 Adds ambient lighting to the back of a tv or monitor.  
 
-![GIF](/Users/Berto/Projects/website/rtedwards.github.io/assets/Ambient-Lighting.gif?raw=true "Title")
+![](https://github.com/rtedwards/Ambient-Lighting/blob/master/img/Ambient-Lighting.gif)
 
-![Image](/Users/Berto/Projects/website/rtedwards.github.io/assets/exam-season.png?raw=true "Title")
+# Getting Started
 
+You will need:
+
+- [Arduino](https://www.arduino.cc/) - an Arduino Nano should be enough
+- [Neopixels](https://www.adafruit.com/category/168)
+- USB cable - Micro or Mini depending on Arduino board
+- A computer with Mac OS
