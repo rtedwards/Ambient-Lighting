@@ -102,18 +102,11 @@ class ScreenShot(object):
         for i in range(x1, x2, skip_factor):
             for j in range(y1, y2, skip_factor):
                 temp = self.pixel(i, j)
-<<<<<<< HEAD
                 
                 #rgb[0] += temp[0] * temp[3]/255 #Sum plus alpha correction
                 #rgb[1] += temp[1] * temp[3]/255
                 #rgb[2] += temp[2] * temp[3]/255
                 #rgb[3] += temp[3]
-=======
-                rgb[0] += temp[0]
-                rgb[1] += temp[1]
-                rgb[2] += temp[2]
-                rgb[3] += temp[3]
->>>>>>> a83415954ab02ae641860f9dc64999011bd1a2d6
 
                 rgb[0] += temp[0] 
                 rgb[1] += temp[1]
@@ -132,10 +125,6 @@ class ScreenShot(object):
 
         return rgb
 
-        for i in range(4):
-            rgb[i] = rgb[i]/pixels
-        return rgb
-
 
 if __name__ == '__main__':
     # configure the serial connections (the parameters differs on the device you are connecting to)
@@ -144,7 +133,6 @@ if __name__ == '__main__':
     port.open()
 
 
-<<<<<<< HEAD
     right_lights = 20
     top_lights = 30
     left_lights = 20
@@ -158,11 +146,6 @@ if __name__ == '__main__':
     left = [[0 for x in range(3)] for x in range(left_lights)] 
     colors = [[0 for x in range(3)] for x in range(lights)] 
 
-=======
-    count = 0
-    skip_factor = 10
-    section_color = [[0 for x in range(3)] for x in range(7)] 
->>>>>>> a83415954ab02ae641860f9dc64999011bd1a2d6
     screen = ScreenShot()  #Create ScreenPixel object
 
     # Timer helper-function
@@ -183,7 +166,6 @@ if __name__ == '__main__':
      
         #Average the color of different sections of the screenshot
         with timer("Averaging Colors in Sections"):
-<<<<<<< HEAD
             print '\nRight Side'
             for i in range(0, right_lights):
                 w1 = screen.width - border
@@ -227,110 +209,9 @@ if __name__ == '__main__':
                         port.write(chr(colors[i][j]))
 
                
-=======
-            section_color[0] = screen.averageColorInRegion(screen.width - 300, screen.height/2, screen.width, screen.height, skip_factor)
-            section_color[1] = screen.averageColorInRegion(screen.width - 300, 0, screen.width, screen.height/2, skip_factor)
-            section_color[2] = screen.averageColorInRegion(screen.width*2/3, 0, screen.width, 300, skip_factor)
-            section_color[3] = screen.averageColorInRegion(screen.width/3, 0, screen.width*2/3, 300, skip_factor)
-            section_color[4] = screen.averageColorInRegion(0, 0, 960, 300, skip_factor)
-            section_color[5] = screen.averageColorInRegion(0, 0, 300, screen.height/2, skip_factor)
-            section_color[6] = screen.averageColorInRegion(0, screen.height/2, 300, screen.height, skip_factor)
-            
-            if (port.isOpen()):
-                for i in range(7):
-                    for j in range(3):
-                        if (section_color[i][j] < 50):
-                            section_color[i][j] = section_color[i][j] / 4 #make the blacks blacker
-                        print "Writing Port: ", section_color[i][j]
-                        port.write(chr(section_color[i][j]))
-                        #port.write(chr(255))
-
-            #print "Attempting to read Port: ", port.inWaiting()
-            #if (port.inWaiting()):
-            #    print "From Port: ", port.read(1)
-
-
-            '''
-            with timer("Upper Left"):
-                screen.averageColorInRegion(0, 0, 960, 300, 5)
-            print ""
-            
-            with timer("Upper Middle"):
-                screen.averageColorInRegion(screen.width/3, 0, screen.width*2/3, 300, 5)
-            print ""
-            
-            with timer("Upper Right"):
-                screen.averageColorInRegion(screen.width*2/3, 0, screen.width, 300, 5)
-            print ""
-            
-            with timer("Left Upper"):
-                screen.averageColorInRegion(0, 0, 300, screen.height/2, 5)
-            print ""
-            
-            with timer("Left Lower"):
-                screen.averageColorInRegion(0, screen.height/2, 300, screen.height, 5)
-            print ""
-            
-            with timer("Right Upper"):
-                screen.averageColorInRegion(screen.width - 300, 0, screen.width, screen.height/2, 5)
-            print ""
-            
-            with timer("Right Lower"):
-                screen.averageColorInRegion(screen.width - 300, screen.height/2, screen.width, screen.height, 5)
-            print ""
-            '''
-
-               
-            count += 1
->>>>>>> a83415954ab02ae641860f9dc64999011bd1a2d6
             print "" 
             # To verify screen-cap code is correct, save all pixels to PNG,
             # using http://the.taoofmac.com/space/projects/PNGCanvas
             
     #port.close()    #Close serial port
-<<<<<<< HEAD
-=======
-
-
-        '''
-        from pngcanvas import PNGCanvas
-        c = PNGCanvas(screen.width, screen.height)
-        
-        for x in range(screen.width):
-            for y in range(screen.height):
-                c.point(x, y, color = screen.pixel(x, y))
-     
-
-        for x in range(screen.width - 300, screen.width):
-            for y in range(screen.height/2, screen.height):
-                c.point(x, y, color = section_color[0])
-        for x in range(screen.width - 300, screen.width):
-            for y in range(0, screen.height/2):
-                c.point(x, y, color = section_color[1])
-
-        for x in range(screen.width*2/3, screen.width):
-            for y in range(0, 300):
-                c.point(x, y, color = section_color[2])
-        for x in range(screen.width/3, screen.width*2/3):
-            for y in range(0, 300):
-                c.point(x, y, color = section_color[3])
-        for x in range(0, screen.width/3):
-            for y in range(0, 300):
-                c.point(x, y, color = section_color[4])
-
-        for x in range(0, 300):
-            for y in range(0, screen.height/2):
-                c.point(x, y, color = section_color[5])
-        for x in range(0, 300):
-            for y in range(screen.height/2, screen.height):
-                c.point(x, y, color = section_color[6])
-
-        with open("test.png", "wb") as f:
-            f.write(c.dump())
-            
-        '''
-
-
-
->>>>>>> a83415954ab02ae641860f9dc64999011bd1a2d6
 
